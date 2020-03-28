@@ -1,0 +1,42 @@
+{{/*###
+Handler=/
+TitleBar=Home Page
+KyutGrill=homepage2.jpg
+*/}}
+{{ define "tpl" }}
+{{ $cf := .ClientFlags }}
+{{ $ds := band $cf 1 }}
+{{ $   := . }}
+<div class="ui container">
+	<div class="ui center aligned segment">
+		<img src="/static/logos/logo-debiki.png">
+	</div>
+	{{ $set := systemSettings "website_home_alert" }}
+	{{ with $set.website_home_alert.String }}
+		<div class="ui warning message">
+			{{ . | html }}
+		</div>
+	{{ end }}
+	{{/* Not logged in block */}}
+	{{ if not .Context.User.ID }}
+		<div class="ui segment">
+			<h1 class="ui header">{{ .T "Welcome to Debiki." }}</h1>
+			<p>
+				{{ .T "You look new here. Allow us to introduce you to what Debiki is. ^-^" }}
+			</p>
+			<p>
+				{{ .T "Debiki is an OverStack's osu! server, featuring: multiplayer, Score system instead of PP, an (in)active community, sotarks, VityaKot and <a href='https://vk.com/illidan69420'>Cookiezi fan club</a>. A bancho is broken(no, lol), which is why it is better here. Very cool. Very mechanical." | html }}
+			</p>
+			<h3 class="ui header center aligned">{{ .T "<b>We currently have %s online farmers and %s <s>restricted</s> registered farmers!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}</h3>
+		</div>
+	{{ else }}
+		<div class="ui segment">
+			<h1 class="ui header">{{ .T "You are get back to farm some maps, %s?" .Context.User.Username }}</h1>
+			<p>
+				{{ .T "Welcome back to Debiki, farmer! Very cool. Very mechanical." | html }}
+			</p>
+                        <h3 class="ui header center aligned">{{ .T "<b>We currently have %s online farmers and %s <s>restricted</s> registered farmers!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}</h3>
+		</div>
+	{{ end }}
+</div>
+{{ end }}
