@@ -283,9 +283,6 @@ func generateEngine() *gin.Engine {
 	r.POST("/register", registerSubmit)
 	r.GET("/register/verify", verifyAccount)
 	r.GET("/register/welcome", welcome)
-	
-	r.GET("/clans/create", ccreate)
-	r.POST("/clans/create", ccreateSubmit)
 
 	r.GET("/u/:user", userProfile)
 	r.GET("/rx/u/:user", relaxProfile)
@@ -315,11 +312,6 @@ func generateEngine() *gin.Engine {
 	r.POST("/settings/2fa/totp", totpSetup)
 	r.GET("/settings/discord/finish", discordFinish)
 	r.POST("/settings/profbackground/:type", profBackground)
-	
-	r.POST("/settings/clansettings", createInvite)
-	r.POST("settings/clansettings/k", clanKick)
-	r.GET("/clans/invite/:inv", clanInvite)
-	r.POST("/c/:cid", leaveClan)
 
 	r.POST("/dev/tokens/create", createAPIToken)
 	r.POST("/dev/tokens/delete", deleteAPIToken)
