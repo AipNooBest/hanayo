@@ -7,9 +7,9 @@ import (
 	"syscall"
 
 	"zxq.co/ripple/agplwarning"
-	"zxq.co/ripple/rippleapi/app"
-	"zxq.co/ripple/rippleapi/beatmapget"
-	"zxq.co/ripple/rippleapi/common"
+	"github.com/AipNooBest/api/app"
+	"github.com/AipNooBest/api/beatmapget"
+	"github.com/AipNooBest/api/common"
 	"zxq.co/ripple/schiavolib"
 	// Golint pls dont break balls
 	_ "github.com/go-sql-driver/mysql"
@@ -31,12 +31,12 @@ func init() {
 var db *sqlx.DB
 
 func main() {
-	err := agplwarning.Warn("ripple", "Ripple API")
+	err := agplwarning.Warn("Debiki", "Debiki API")
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Print("Ripple API")
+	fmt.Print("Debiki API")
 	if Version != "" {
 		fmt.Print("; git commit hash: ", Version)
 	}
@@ -47,7 +47,7 @@ func main() {
 		return
 	}
 
-	schiavo.Prefix = "Ripple API"
+	schiavo.Prefix = "Debiki API"
 
 	if !strings.Contains(conf.DSN, "parseTime=true") {
 		c := "?"

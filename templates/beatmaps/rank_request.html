@@ -10,15 +10,6 @@ MinPrivileges=2
 	<div class="ui raised segment center aligned">
 		{{ $f := ieForm .Gin }}
 		<h4>{{ .T "Want to play an unranked beatmap and get pp? You can submit beatmaps rank requests here!" }}</h4>
-		<h4>{{ .T "The 'Ranking Criteria' are as follows:" }}</h4>
-		<div class="ui bulleted list">
-			<div class="item">{{ .T "Follow the <a href='https://osu.ppy.sh/help/wiki/Ranking_Criteria/'>Bancho Ranking Criteria</a> to some extend" | html }}</div>
-			<div class="item">{{ .T "No clear abuse of any systems (pp/stars)" }}</div>
-			<div class="item">{{ .T "No speedup or re-upload of existing maps" }}</div>
-			<div class="item">{{ .T "No Jump/Stream Training Compilations" }}</div>
-			<div class="item">{{ .T "At least 66% Completion for 7+ Minute songs, anything else completely mapped" }}</div>
-			<div class="item">{{ .T "Popularity does not mean rankable" }}</div>
-		</div>
 		{{ with .Get "beatmaps/rank_requests/status" }}
 			<h4 class="ui horizontal divider header">
 				<i class="wait icon"></i>
@@ -29,7 +20,7 @@ MinPrivileges=2
 			<h4 style="display: inline; font-weight: normal;">{{ $.T "In the past 24 hours" }}</h4><br>
 			{{ $perc := perc .submitted .queue_size }}
 			<div class="ui container" style="width: 50%; margin-top: 8px; margin-bottom: 8px;">
-				<div class="ui green progress" data-percent="{{ $perc }}" id="progressbar">
+				<div class="ui red progress" data-percent="{{ $perc }}" id="progressbar">
 					<div class="bar">
 						<div class="progress">{{ $perc }}%</div>
 					</div>
@@ -44,7 +35,7 @@ MinPrivileges=2
 					<div class="ui fluid action input">
 						<input tabindex="1" type="text" placeholder="https://osu.ppy.sh/s/xxxx" id="beatmap">
 						{{ $f }}
-						<button tabindex="2" class="ui right labeled icon green button">
+						<button tabindex="2" class="ui right labeled icon red button">
 							<i class="right arrow icon"></i>
 							{{ $.T "Submit" }}
 						</button>

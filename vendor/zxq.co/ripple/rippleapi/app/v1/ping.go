@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"zxq.co/ripple/rippleapi/common"
+	"github.com/AipNooBest/api/common"
 )
 
 var rn = rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -74,7 +74,7 @@ var randomSentences = [...]string{
 	"Feelin' groovy!",
 	"sudo rm -rf /",
 	"Hi! I'm Flowey! Flowey the flower!",
-	"Ripple devs are actually cats",
+	"Debiki devs are actually cats",
 	"Support Howl's fund for buying a power supply for his SSD!",
 	"Superman dies",
 	"PP when?",

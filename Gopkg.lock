@@ -339,9 +339,9 @@
 
 [[projects]]
   branch = "master"
-  name = "zxq.co/ripple/rippleapi"
+  name = "github.com/AipNooBest/api"
   packages = ["common"]
-  revision = "34f24b8de68b46de2cbbfce71bb17c8ad1279f0f"
+  revision = "58aa42d8e497abbfbbcd0798e66ca81d8596e8a4"
 
 [[projects]]
   branch = "master"

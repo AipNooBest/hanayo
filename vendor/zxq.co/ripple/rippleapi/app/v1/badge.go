@@ -3,7 +3,7 @@ package v1
 import (
 	"database/sql"
 
-	"zxq.co/ripple/rippleapi/common"
+	"github.com/AipNooBest/api/common"
 )
 
 type singleBadge struct {
@@ -17,7 +17,7 @@ type multiBadgeData struct {
 	Badges []singleBadge `json:"badges"`
 }
 
-// BadgesGET retrieves all the badges on this ripple instance.
+// BadgesGET retrieves all the badges on this Debiki instance.
 func BadgesGET(md common.MethodData) common.CodeMessager {
 	var (
 		r    multiBadgeData

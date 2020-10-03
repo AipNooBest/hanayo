@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/mailgun/mailgun-go.v1"
-	"zxq.co/ripple/rippleapi/common"
+	"github.com/AipNooBest/api/common"
 	"zxq.co/x/rs"
 )
 
@@ -71,7 +71,7 @@ func passwordReset(c *gin.Context) {
 	)
 	msg := mailgun.NewMessage(
 		config.MailgunFrom,
-		T(c, "Ripple password recovery instructions"),
+		T(c, "Debiki password recovery instructions"),
 		content,
 		email,
 	)

@@ -18,7 +18,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/nfnt/resize"
-	"zxq.co/ripple/rippleapi/common"
+	"github.com/AipNooBest/api/common"
 	"zxq.co/x/rs"
 )
 
@@ -301,7 +301,7 @@ func editOAuthApplicationSubmit(c *gin.Context) {
 }
 
 const createClientMessage = `
-You can now get going integrating Ripple in your super cool project!
+You can now get going integrating Debiki in your super cool project!
 Here's what you need:<br>
 <pre>client_id     = "%s"
 client_secret = "%s"</pre>

@@ -1,5 +1,5 @@
 {
-    "An error occurred while contacting the Ripple API. Please report this to a Ripple developer.": "Произошла ошибка при соединении с API Ripple. Пожалуйста, сообщите об этом разработчикам.",
+    "An error occurred while contacting the Debiki API. Please report this to a Debiki developer.": "Произошла ошибка при соединении с API Debiki Пожалуйста, сообщите об этом разработчикам.",
     "Why, LOVE, of course!": "Уровень",
     "Your new settings have been saved.": "Ваши новые настройки были сохранены.",
     "Your userpage has been saved.": "Ваш юзерпейдж был сохранен.",
@@ -36,6 +36,5 @@
     "($ {{ usd }} / BTC {{ btc }})": "($ {{ usd }} / BTC {{ btc }})",
     "Mutual": "Взаимно",
     "Remove": "Удалить",
-    "Add": "Добавить",
-    "farmer": "фармер"
+    "Add": "Добавить"
 }

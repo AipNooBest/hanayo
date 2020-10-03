@@ -7,36 +7,136 @@ KyutGrill=homepage2.jpg
 {{ $cf := .ClientFlags }}
 {{ $ds := band $cf 1 }}
 {{ $   := . }}
-<div class="ui container">
-	<div class="ui center aligned segment">
-		<img src="/static/logos/logo-debiki.png">
+
+{{/* CSS Zone */}}
+<style>
+	.status {
+		display: flex;
+		font-size: 14px;
+		font-weight: 500;
+		z-index: 3;
+		position: absolute;
+		-webkit-transform: translateY(-100px) translateX(5px);
+		transform: translateY(-100px) translateX(5px);
+		padding: 2px 10px;
+		color: #fff;
+		margin-left: 5px;
+		border-radius: 20px;
+		background: rgba(0,0,0,.6);
+	}
+</style>
+{{/* End CSS */}}
+
+	<div class="ui container">
+		<div class=""> 
+		<div class="main-block">
+			<div class="woman"></div>
+			<div class="content">
+				<div class="status">
+					<span>
+						<span style="color: #4287f5;" class="counter-text"> {{ .T "%s" (rediget "ripple:registered_users")}} </span>{{ .T "total users" }}
+					</span>
+					<span style="margin-left: 16px;">
+						<span class="counter-text" style="color: #eb4034;"> {{ .T "%s" (rediget "ripple:online_users")}} </span>{{ .T "online users" }}
+					</span>
+				</div>
+				<br>
+				<span class="text-lg">
+					Debiki
+				</span>
+				<span class="text-sm">
+					<b>{{ .T "Welcome to Debiki" }}!</b>
+					<br><br>
+	
+					{{ .T "Debiki is an OverStack's osu! server, featuring: multiplayer, Score system instead of PP, an (in)active community, !mp roll, VityaKot and <a href='https://vk.com/illidan69420'>Cookiezi fan club</a>. A bancho is broken(no, lol), which is why it is better here. Very cool. Very mechanical." | html }}
+				</span>
+				<div class="buttons">
+					{{ if not .Context.User.ID }}
+						<a href="/register" class="home-btn btn-key" >{{ .T "Register" }}</a>
+					{{end}}
+					<a href="https://aipserver.ru/p/DebikiSwitcher.exe" class="home-btn btn-how" style="margin-left: 6px;">{{ .T "Server Switcher" }}</a>
+				</div>
+			</div>
+		</div>
+	{{/* MarginBoi */}}
+	<br> 
+	{{/* Global Statistics */}}
+	<div class="ui stackable column divided grid" id="first-grid">
+		<div class="five wide column">
+			<div class="ui segments" style="height: 100%;">
+				<div class="sixteen wide column" style="margin-bottom: 11px;">
+					<div class="ui blue segment">
+						<div class="ui grid">
+							<div class="four wide column">
+								<i class="user icon status-icon"></i>
+							</div>
+							<div class="twelve wide column">
+								{{ range $key, $value := (qb "SELECT COUNT(*) FROM users WHERE privileges >= 3") }}
+								<p class="status-head">{{ rediget "ripple:online_users" }} / {{ $value }}</p>
+								{{ end }}
+								<p class="status-footer">{{ .T "Online / Registered" }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			<div class="sixteen wide column" style="margin-bottom: 11px;">
+				<div class="ui orange segment">
+					<div class="ui grid">
+						<div class="four wide column">
+							<i class="user plus icon status-icon"></i>
+						</div>
+						<div class="twelve wide column">
+							{{ range $key, $value := (qb "SELECT username FROM users WHERE privileges >=3 ORDER BY id DESC LIMIT 1") }}
+							{{ range $key, $valu := (qb "SELECT id FROM users WHERE privileges >=3 ORDER BY id DESC LIMIT 1") }}
+							<p class="status-head" style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+								<a href="/u/{{ $valu }}" style="color: inherit;">{{ $value }}</a>
+							</p>
+							{{ end }}
+							{{ end }}
+							<p class="status-footer">{{ .T "Latest Player" }}</p>
+						</div>
+					</div>
+			  </div>
+		</div>
 	</div>
-	{{ $set := systemSettings "website_home_alert" }}
-	{{ with $set.website_home_alert.String }}
-		<div class="ui warning message">
-			{{ . | html }}
-		</div>
-	{{ end }}
-	{{/* Not logged in block */}}
-	{{ if not .Context.User.ID }}
-		<div class="ui segment">
-			<h1 class="ui header">{{ .T "Welcome to Debiki." }}</h1>
-			<p>
-				{{ .T "You look new here. Allow us to introduce you to what Debiki is. ^-^" }}
-			</p>
-			<p>
-				{{ .T "Debiki is an OverStack's osu! server, featuring: multiplayer, Score system instead of PP, an (in)active community, !mp roll, VityaKot and <a href='https://vk.com/illidan69420'>Cookiezi fan club</a>. A bancho is broken(no, lol), which is why it is better here. Very cool. Very mechanical." | html }}
-			</p>
-			<h3 class="ui header center aligned">{{ .T "<b>We currently have %s online farmers and %s <s>restricted</s> registered farmers!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}</h3>
-		</div>
-	{{ else }}
-		<div class="ui segment">
-			<h1 class="ui header">{{ .T "You are get back to farm some maps, %s?" .Context.User.Username }}</h1>
-			<p>
-				{{ .T "Welcome back to Debiki, farmer! Very cool. Very mechanical." | html }}
-			</p>
-                        <h3 class="ui header center aligned">{{ .T "<b>We currently have %s online farmers and %s <s>restricted</s> registered farmers!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}</h3>
-		</div>
-	{{ end }}
 </div>
-{{ end }}
+	<div class="five wide column">
+		<div class="ui segments" style="height: 100%;">
+			<div class="sixteen wide column" style="margin-bottom: 11px;">
+				<div class="ui yellow segment">
+					<div class="ui grid">
+						<div class="four wide column">
+							<i class="thumbs up icon status-icon"></i>
+						</div>
+						<div class="twelve wide column">
+							{{ $d := (qb "SELECT score AS score, users.username, users.id FROM scores INNER JOIN users ON scores.userid = users.id WHERE scores.play_mode = 0 AND completed = 3 AND users.privileges > 2 ORDER BY score DESC LIMIT 1;") }}
+							<p class="status-head">{{ $d.score }}</p>
+							<p class="status-head" style="font-size: 10px!important;">{{ .T "Done by" }} <a href="/u/{{ $d.id }}">{{ $d.username }}</a></p>
+							<p class="status-footer">{{ .T "Top Score" }}</p>
+						</div>
+					</div>
+				</div>
+			  <div class="sixteen wide column">
+                <div class="ui green segment">
+                    <div class="ui grid">
+                        <div class="four wide column">
+                            <i class="user icon status-icon"></i>
+                        </div>
+                        <div class="twelve wide column">
+                             {{ $value := (qb "SELECT ROUND(SUM(scores.score)) AS score FROM scores INNER JOIN users ON scores.userid = users.id WHERE scores.completed = 3 AND scores.play_mode = 0 AND users.privileges > 2") }}
+                        <p class="status-head">{{ $value.score }}</p>
+                        <p class="status-footer">{{ .T "Total score" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			</div>
+		</div>
+	</div>
+	</div> {{/* Global Stats end past this /div */}}
+	</div>
+	</div>
+	
+	{{ end }}
+	

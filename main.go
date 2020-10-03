@@ -22,12 +22,12 @@ import (
 	"gopkg.in/mailgun/mailgun-go.v1"
 	"gopkg.in/redis.v5"
 	"zxq.co/ripple/agplwarning"
-	"zxq.co/ripple/hanayo/modules/btcaddress"
-	"zxq.co/ripple/hanayo/modules/btcconversions"
-	"zxq.co/ripple/hanayo/routers/oauth"
-	"zxq.co/ripple/hanayo/routers/pagemappings"
-	"zxq.co/ripple/hanayo/services"
-	"zxq.co/ripple/hanayo/services/cieca"
+	"github.com/AipNooBest/hanayo/modules/btcaddress"
+	"github.com/AipNooBest/hanayo/modules/btcconversions"
+	"github.com/AipNooBest/hanayo/routers/oauth"
+	"github.com/AipNooBest/hanayo/routers/pagemappings"
+	"github.com/AipNooBest/hanayo/services"
+	"github.com/AipNooBest/hanayo/services/cieca"
 	"zxq.co/ripple/schiavolib"
 	"zxq.co/x/rs"
 )
@@ -99,7 +99,7 @@ var (
 )
 
 func main() {
-	err := agplwarning.Warn("ripple", "Hanayo")
+	err := agplwarning.Warn("Debiki", "Hanayo")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -119,18 +119,18 @@ func main() {
 	}
 
 	var configDefaults = map[*string]string{
-		&config.ListenTo:         ":45221",
+		&config.ListenTo:         ":6969",
 		&config.CookieSecret:     rs.String(46),
-		&config.AvatarURL:        "https://a.ripple.moe",
-		&config.BaseURL:          "https://ripple.moe",
-		&config.BanchoAPI:        "https://c.ripple.moe",
+		&config.AvatarURL:        "https://a.aipserver.ru",
+		&config.BaseURL:          "https://aipserver.ru",
+		&config.BanchoAPI:        "https://c.aipserver.ru",
 		&config.CheesegullAPI:    "https://storage.ripple.moe/api",
 		&config.API:              "http://localhost:40001/api/v1/",
-		&config.APISecret:        "Potato",
+		&config.APISecret:        "KEKW",
 		&config.IP_API:           "https://ip.zxq.co",
-		&config.DiscordServer:    "#",
-		&config.MainRippleFolder: "/home/ripple/ripple",
-		&config.MailgunFrom:      `"Ripple" <noreply@ripple.moe>`,
+		&config.DiscordServer:    "",
+		&config.MainRippleFolder: "/home/RIPPLE/",
+		&config.MailgunFrom:      `"Debiki" <noreply@aipserver.ru>`,
 	}
 	for key, value := range configDefaults {
 		if *key == "" {
@@ -283,8 +283,14 @@ func generateEngine() *gin.Engine {
 	r.POST("/register", registerSubmit)
 	r.GET("/register/verify", verifyAccount)
 	r.GET("/register/welcome", welcome)
+	
+	r.GET("/clans/create", ccreate)
+	r.POST("/clans/create", ccreateSubmit)
 
 	r.GET("/u/:user", userProfile)
+	r.GET("/rx/u/:user", relaxProfile)
+	r.GET("/ap/u/:user", autoProfile)
+	r.GET("/c/:cid", clanPage)
 	r.GET("/b/:bid", beatmapInfo)
 
 	r.POST("/pwreset", passwordReset)
@@ -309,6 +315,11 @@ func generateEngine() *gin.Engine {
 	r.POST("/settings/2fa/totp", totpSetup)
 	r.GET("/settings/discord/finish", discordFinish)
 	r.POST("/settings/profbackground/:type", profBackground)
+	
+	r.POST("/settings/clansettings", createInvite)
+	r.POST("settings/clansettings/k", clanKick)
+	r.GET("/clans/invite/:inv", clanInvite)
+	r.POST("/c/:cid", leaveClan)
 
 	r.POST("/dev/tokens/create", createAPIToken)
 	r.POST("/dev/tokens/delete", deleteAPIToken)
@@ -328,7 +339,7 @@ func generateEngine() *gin.Engine {
 	r.Any("/blog/*url", blogRedirect)
 
 	r.GET("/help", func(c *gin.Context) {
-		c.Redirect(301, "https://support.ripple.moe")
+		c.Redirect(301, "https://discord.gg/Qp3WQU8")
 	})
 
 	loadSimplePages(r)
@@ -339,5 +350,5 @@ func generateEngine() *gin.Engine {
 }
 
 const alwaysRespondText = `Ooops! Looks like something went really wrong while trying to process your request.
-Perhaps report this to a Ripple developer?
+Perhaps report this to a Debiki developer?
 Retrying doing again what you were trying to do might work, too.`

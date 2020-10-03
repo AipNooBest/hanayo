@@ -16,10 +16,10 @@ msgstr ""
 
 # JavaScript
 msgid ""
-"An error occurred while contacting the Ripple API. Please report this to a "
-"Ripple developer."
+"An error occurred while contacting the Debiki API. Please report this to a "
+"Debiki developer."
 msgstr ""
-"Произошла ошибка при соединении с Ripple API. Пожалуйста, сообщите об этом "
+"Произошла ошибка при соединении с Debiki API. Пожалуйста, сообщите об этом "
 "разработчикам."
 
 # This is a quote of UNDERTALE if you didn't know.

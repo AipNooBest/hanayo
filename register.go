@@ -11,7 +11,7 @@ import (
 
 	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
-	"zxq.co/ripple/rippleapi/common"
+	"github.com/AipNooBest/api/common"
 	"zxq.co/ripple/schiavolib"
 )
 
@@ -120,8 +120,11 @@ func registerSubmit(c *gin.Context) {
 	}
 	lid, _ := res.LastInsertId()
 
-	db.Exec("INSERT INTO `users_stats`(id, username, user_color, user_style, ranked_score_std, playcount_std, total_score_std, ranked_score_taiko, playcount_taiko, total_score_taiko, ranked_score_ctb, playcount_ctb, total_score_ctb, ranked_score_mania, playcount_mania, total_score_mania) VALUES (?, ?, 'black', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);", lid, username)
-
+	res, err = db.Exec("INSERT INTO `users_stats`(id, username, user_color, user_style, ranked_score_std, playcount_std, total_score_std, ranked_score_taiko, playcount_taiko, total_score_taiko, ranked_score_ctb, playcount_ctb, total_score_ctb, ranked_score_mania, playcount_mania, total_score_mania) VALUES (?, ?, 'black', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);", lid, username)
+	res, err = db.Exec("INSERT INTO `rx_stats`(id, username, user_color, user_style, ranked_score_std, playcount_std, total_score_std, ranked_score_taiko, playcount_taiko, total_score_taiko, ranked_score_ctb, playcount_ctb, total_score_ctb, ranked_score_mania, playcount_mania, total_score_mania) VALUES (?, ?, 'black', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);", lid, username)
+	if err != nil {
+		fmt.Println(err)
+	}
 	schiavo.CMs.Send(fmt.Sprintf("User (**%s** | %s) registered from %s", username, c.PostForm("email"), clientIP(c)))
 
 	setYCookie(int(lid), c)
@@ -129,7 +132,7 @@ func registerSubmit(c *gin.Context) {
 
 	rd.Incr("ripple:registered_users")
 
-	addMessage(c, successMessage{T(c, "You have been successfully registered on Ripple! You now need to verify your account.")})
+	addMessage(c, successMessage{T(c, "You have been successfully registered on Debiki! You now need to verify your account.")})
 	getSession(c).Save()
 	c.Redirect(302, "/register/verify?u="+strconv.Itoa(int(lid)))
 }

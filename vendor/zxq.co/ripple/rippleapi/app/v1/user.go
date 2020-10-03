@@ -1,4 +1,4 @@
-// Package v1 implements the first version of the Ripple API.
+// Package v1 implements the first version of the Debiki API.
 package v1
 
 import (
@@ -8,8 +8,8 @@ import (
 	"unicode"
 
 	"github.com/jmoiron/sqlx"
-	"zxq.co/ripple/ocl"
-	"zxq.co/ripple/rippleapi/common"
+	"github.com/AipNooBest/ocl"
+	"github.com/AipNooBest/api/common"
 )
 
 type userData struct {

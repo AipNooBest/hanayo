@@ -1,13 +1,17 @@
-# Hanayo ![build status](https://ci.zxq.co/api/badges/ripple/hanayo/status.svg)
+# Hanayo - Debiki's frontend
 
-This repository has a mirror [here](https://github.com/osuripple/hanayo). The original repo is still [here](https://zxq.co/ripple/hanayo).
+This is the [frontend](https://osu.aipserver.ru/) of Debiki.
 
-## To fellow developers: this is not how you do it!
+It is based on Ripple's version of [hanayo](https://github.com/osuripple/hanayo).
+
+Some design elements have been taken from osuAkatsuki.
+
+## (Debiki's Note) To fellow developers: this is not how you do it!
 
 The biggest flaw of hanayo are that when I set out to create it, I wanted to create a template system that:
 
 * Created a handler by simply having the file "be there"
-* Could fetch the data it needed on its own, often from the Ripple API
+* Could fetch the data it needed on its own, often from the Debiki! API
 * Had the actual Go code be as little as possible
 
 This was not immediately evident to me, a Go beginner, but what I did there was basically make Go be PHP.

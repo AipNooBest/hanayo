@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"zxq.co/ripple/rippleapi/common"
+	"github.com/AipNooBest/api/common"
 )
 
 // This basically proxies requests from Medium's API and is used on Ripple's
@@ -86,7 +86,7 @@ func init() {
 	gob.Register([]blogPost{})
 }
 
-// BlogPostsGET retrieves the latest blog posts on the Ripple blog.
+// BlogPostsGET retrieves the latest blog posts on the Debiki blog.
 func BlogPostsGET(md common.MethodData) common.CodeMessager {
 	// check if posts are cached in redis
 	res := md.R.Get("api:blog_posts").Val()

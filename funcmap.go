@@ -21,12 +21,12 @@ import (
 	"github.com/thehowl/qsql"
 	"golang.org/x/oauth2"
 	"zxq.co/ripple/go-discord-oauth"
-	"zxq.co/ripple/hanayo/modules/bbcode"
-	"zxq.co/ripple/hanayo/modules/btcaddress"
-	"zxq.co/ripple/hanayo/modules/doc"
-	"zxq.co/ripple/hanayo/modules/fa-semantic-mappings"
+	"github.com/AipNooBest/hanayo/modules/bbcode"
+	"github.com/AipNooBest/hanayo/modules/btcaddress"
+	"github.com/AipNooBest/hanayo/modules/doc"
+	"github.com/AipNooBest/hanayo/modules/fa-semantic-mappings"
 	"zxq.co/ripple/playstyle"
-	"zxq.co/ripple/rippleapi/common"
+	"github.com/AipNooBest/api/common"
 )
 
 // funcMap contains useful functions for the various templates.
@@ -402,7 +402,7 @@ var funcMap = template.FuncMap{
 	"shift": func(n1, n2 int) int {
 		return n1 << uint(n2)
 	},
-	// calculateDonorPrice calculates the price of x donor months in euros.
+	// calculateDonorPrice calculates the price of x donor months in POUNDS I THINK.
 	"calculateDonorPrice": func(a float64) string {
 		return fmt.Sprintf("%.2f", math.Pow(a*30*0.2, 0.7))
 	},
@@ -497,7 +497,7 @@ var funcMap = template.FuncMap{
 	},
 }
 
-var localeLanguages = []string{"de", "pl", "it", "es", "ru", "fr", "nl", "ro", "fi", "sv", "vi", "ko"}
+var localeLanguages = []string{"de", "pl", "it", "es", "ru", "fr", "nl", "ro", "fi", "sv", "vi", "th", "ko"}
 
 var hanayoStarted = time.Now().UnixNano()
 
@@ -611,5 +611,6 @@ var languageInformation = []langInfo{
 	{"Suomi", "fi", "fi"},
 	{"Svenska", "se", "sv"},
 	{"Tiếng Việt Nam", "vn", "vi"},
+	{"ภาษาไทย", "th", "th"},
 	{"한국어", "kr", "ko"},
 }

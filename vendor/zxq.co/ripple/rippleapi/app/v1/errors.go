@@ -3,12 +3,12 @@ package v1
 import (
 	"strings"
 
-	"zxq.co/ripple/rippleapi/common"
+	"github.com/AipNooBest/api/common"
 )
 
 // Boilerplate errors
 var (
-	Err500     = common.SimpleResponse(500, "An error occurred. Trying again may work. If it doesn't, yell at this Ripple instance admin and tell them to fix the API.")
+	Err500     = common.SimpleResponse(500, "An error occurred. Trying again may work. If it doesn't, yell at this Debiki instance admin and tell them to fix the API.")
 	ErrBadJSON = common.SimpleResponse(400, "Your JSON for this request is invalid.")
 )
 
